@@ -1,44 +1,26 @@
 require('./config/config');
 
+
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const app = express();
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
-app.use(bodyParser.json())
-
-
-app.get('/',(req,res)=>{
-
-res.json('Hola a todos')
-
-})
+//////////REQUERIMOS LAS RUTAS///////////////
+app.use(require('./routes/usuario'));
 
 
-app.post('/usuario',(req,res)=>{
+//////////CONEXION A BASE DE DATOS//////////////
+mongoose.connect(process.env.URLDB,(error,respuesta)=>{
 
-let body = req.body;
+  if(error){throw error}
 
-if(body.nombre === undefined){
-res.status(400).json({ok:false,
-                    message:'El nombre es necesario'})}
-
-res.json({body})})
+  console.log(`Base de datos conectada a ${process.env.URLDB}`)});
 
 
-
-app.put('/usuario/:id',(req,res)=>{
-
-let id = req.params.id
-
-res.json({id,
-          nombre:'Pancho'})
-
-})
-
-app.delete('/',(req,res)=>{
-
-res.json('Hola a todos')})
-
+////////////CONEXION AL SERVIDOR////////////////
 app.listen(process.env.PORT, ()=>{console.log(`Escuchando en el puerto ${process.env.PORT}`)})
