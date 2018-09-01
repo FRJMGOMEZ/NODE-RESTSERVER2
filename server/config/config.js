@@ -17,7 +17,7 @@ let urlDataBase;
 
 if(process.env.NODE_ENV === 'desarollo'){urlDataBase = 'mongodb://localhost:27017/cafe' }
 
-else{urlDataBase = `mongodb://cafeuser:Gondorgenwein123@ds241012.mlab.com:41012/cafe`};
+else{urlDataBase = process.env.MONGO_URI};
 
 
 process.env.URLDB = urlDataBase;
