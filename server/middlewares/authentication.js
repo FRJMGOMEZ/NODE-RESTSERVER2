@@ -12,14 +12,12 @@ let token = req.get('token');
 
     if(error){return res.status(401).json({ok:false,
                                            error:'Token no válido'})}
-
     req.usuario = usuarioDecoded.usuario;
 
-    next()
-
-  })}
+    next()})}
 
 
+    
 ///////////////// VERIFY ADMIN ROLE ///////////////
 
 let verifyRole = (req,res,next)=>{

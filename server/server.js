@@ -4,7 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 
+let publicPath = path.resolve(__dirname , '../public');
+app.use(express.static(publicPath));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());

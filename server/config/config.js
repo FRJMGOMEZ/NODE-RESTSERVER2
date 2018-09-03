@@ -17,10 +17,13 @@ process.env.URLDB = urlDataBase;
 
 
 ////////////// VENCIMIENTO DEL TOKEN //////////////
-
 process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 
 
 /////////////// SEED SECRETO //////////////////////
-
 process.env.SEED = process.env.SEED || 'seed_desarrollo';
+
+
+///////////// GOOGLE-CLIENT ID//////////////////////
+
+process.env.CLIENT_ID;
