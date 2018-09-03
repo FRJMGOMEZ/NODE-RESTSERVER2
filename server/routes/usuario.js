@@ -3,10 +3,14 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const Usuario = require('../models/usuario');
 
+const {verifyToken} = require('../middlewares/authentication');
+const {verifyRole} = require('../middlewares/authentication');
+
 const app = express();
 
 
-app.get('/usuario',(req,res)=>{
+app.get('/usuario',verifyToken,(req,res)=>{
+
 
   let desde = req.query.desde || 0 ;
 
@@ -28,13 +32,11 @@ app.get('/usuario',(req,res)=>{
               res.json({ok:true,
                         usuarios,
                         conteo})
-             })
-          })
-  })
+})})})
 
 
 
-app.post('/usuario',(req,res)=>{
+app.post('/usuario',verifyToken,verifyRole,(req,res)=>{
 
 let body = req.body;
 
@@ -49,13 +51,12 @@ usuario.save((error,usuarioDb)=>{
                                          message:error})}
 
   res.json({ok:true,
-            usuario:usuarioDb})})
-})
+            usuario:usuarioDb})})})
 
 
 
 
-app.put('/usuario/:id',(req,res)=>{
+app.put('/usuario/:id',verifyToken,verifyRole,(req,res)=>{
 
 let id = req.params.id
 
@@ -67,13 +68,12 @@ Usuario.findByIdAndUpdate(id,body,{new:true,
   if(error){return res.status(400).json({ok:false,
                                          message:error})}
   res.json({ok:true,
-            usuario:usuarioDb})})
-})
+            usuario:usuarioDb})})})
 
 
 
 
-app.delete('/usuario/:id',(req,res)=>{
+app.delete('/usuario/:id',verifyToken,verifyRole,(req,res)=>{
 
   let id = req.params.id;
 
@@ -87,9 +87,7 @@ app.delete('/usuario/:id',(req,res)=>{
        if(error){return res.status(400).json({ok:false,
                                               message:error})}
        res.json({ok:true,
-                 usuario:usuarioBorrado})
-  })
-})
+                 usuario:usuarioBorrado})})})
 
 
 
