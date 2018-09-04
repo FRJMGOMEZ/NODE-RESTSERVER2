@@ -26,4 +26,4 @@ process.env.SEED = process.env.SEED || 'seed_desarrollo';
 
 ///////////// GOOGLE-CLIENT ID//////////////////////
 
-process.env.CLIENT_ID;
+process.env.CLIENT_ID = process.env.CLIENT_ID || '722636808179-vldk0api42iur7p31ld9pdafanftekmn.apps.googleusercontent.com';
