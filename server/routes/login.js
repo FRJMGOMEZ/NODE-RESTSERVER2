@@ -29,8 +29,7 @@ let body = req.body;
   res.json({ok:true,
             usuario:usuarioDb,
             token})
-  })
-})
+  })})
 
 
 
@@ -57,8 +56,6 @@ async function verify(token) {
 app.post('/google', async(req,res)=>{
 
   let token = req.body.idtoken;
-
-  
 
   let googleUser = await verify(token)
       .catch(error=>{return res.status(403).json({ok:false,

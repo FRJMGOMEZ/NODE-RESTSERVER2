@@ -17,7 +17,7 @@ process.env.URLDB = urlDataBase;
 
 
 ////////////// VENCIMIENTO DEL TOKEN //////////////
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+process.env.CADUCIDAD_TOKEN = '48h';
 
 
 /////////////// SEED SECRETO //////////////////////
