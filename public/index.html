@@ -8,6 +8,8 @@
   </head>
   <body>
 
+ <img src='http://localhost:3000/imagen/usuarios/5b8d70decfa02d7220f21e02-252.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjpmYWxzZSwiZ29vZ2xlIjp0cnVlLCJfaWQiOiI1YjhkNzBkZWNmYTAyZDcyMjBmMjFlMDIiLCJub21icmUiOiJPcnRvIiwiZW1haWwiOiJmcmptYXJ0aW5lemdvbWV6QGdtYWlsLmNvbSIsImltZyI6IjViOGQ3MGRlY2ZhMDJkNzIyMGYyMWUwMi03NjQuanBlZyIsIl9fdiI6MH0sImlhdCI6MTUzNjgzMzQ4MywiZXhwIjoxNTM3MDA2MjgzfQ.3MsGGROU5GKEiup6aw3IdT3PAxKuaV2hZ9aJFFkrx-8'>
+
   <script>function onSignIn(googleUser) {
 
   var id_token = googleUser.getAuthResponse().id_token;
@@ -21,6 +23,7 @@
 xhr.send('idtoken=' + id_token);
   }
   </script>
+
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 

@@ -22,11 +22,13 @@ app.post('/producto',categorizacion,verifyToken,(req,res)=>{
                                descripcion: body.descripcion,
                                disponible:  body.disponible,
                                categoria:   req.categoria,
-                               usuario:     req.usuario.usuario})
+                               usuario:     req.usuario.usuario,
+                               img:         body.img})
 
   producto.save(async(error,productoGuardado)=>{
 
     if(error){return res.status(500).json({ok:false,
+
                                     message:error})}
 
   let categoria = await Categoria.findOne({_id:productoGuardado.categoria},(error,categoria)=>{
@@ -34,6 +36,7 @@ app.post('/producto',categorizacion,verifyToken,(req,res)=>{
       if(error){ return res.status(500).json({ok:false,
                                               message:error})}
       return  new Categoria(categoria)});
+
 
   categoria.productos.push(productoGuardado._id);
 

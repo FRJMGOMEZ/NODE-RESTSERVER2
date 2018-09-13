@@ -67,15 +67,15 @@ app.post('/google', async(req,res)=>{
                                     message:error})}
     if(usuarioDb){
 
-      if(usuarioDb.google === false){return res.status(500).json({ok:false,
-                                        message:'Debe de usar su autenticación normal'})}
+       if(usuarioDb.google === false){return res.status(500).json({ok:false,
+                                                                   message:'Debe de usar su autenticación normal'})}
 
-      else{  let token = jwt.sign({usuario:usuarioDb},process.env.SEED,{expiresIn: process.env.CADUCIDAD_TOKEN});
-             return res.status(200).json({ok:true,
-                                          usuario:usuarioDb,
-                                          token,
-                                          message:'Token actualizado correctamente'})  }
-      }
+       else{  let token = jwt.sign({usuario:usuarioDb},process.env.SEED,{expiresIn: process.env.CADUCIDAD_TOKEN});
+
+              return res.status(200).json({ok:true,
+                                           usuario:usuarioDb,
+                                           token,
+                                           message:'Token actualizado correctamente'})}}
 
     else{ let usuario = new Usuario();
 
@@ -95,9 +95,7 @@ app.post('/google', async(req,res)=>{
             return res.status(200).json({ok:true,
                                          usuario:usuarioGrabado,
                                          token,
-                                         message:'Usuario registrado correctamente'})})}
-  })
-})
+                                         message:'Usuario registrado correctamente'})})}})})
 
 
 module.exports = app;

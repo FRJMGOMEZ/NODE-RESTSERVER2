@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 
 /////////////// VERIFY TOKEN ////////////////
 
-
 let verifyToken = (req,res,next) => {
 
 let token = req.get('token');
@@ -14,9 +13,7 @@ let token = req.get('token');
                                            error:'Token no válido'})}
     req.usuario = usuarioDecoded;
 
-    next()
-  })}
-
+    next()})}
 
 
 ///////////////// VERIFY ADMIN ROLE ///////////////
@@ -28,4 +25,20 @@ let verifyRole = (req,res,next)=>{
   next()}
 
 
-module.exports = {verifyToken,verifyRole};
+
+////////////// VERIFY TOKEN IMG ///////////////////////
+
+let verifyTokenImg = (req,res,next) => {
+
+let token = req.query.token;
+
+  jwt.verify(token,process.env.SEED,(error,usuarioDecoded)=>{
+
+    if(error){return res.status(401).json({ok:false,
+                                           error:'Token no válido'})}
+    req.usuario = usuarioDecoded;
+
+    next()})}
+
+
+module.exports = {verifyToken,verifyRole,verifyTokenImg};

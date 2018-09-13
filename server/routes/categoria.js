@@ -28,13 +28,18 @@ const app = express();
 
     else if(nombreCategoria){
 
-    Categoria.findOne({nombre:nombreCategoria},(error,categoriaDb)=>{
+    Categoria.find({nombre:nombreCategoria})
+             .populate({path:'productos',select:'nombre'})
+             .populate('usuario','nombre')
+             .exec((error,categoriaDb)=>{
 
       if(error){return res.status(500).json({ok:false,
                                       message:error})}
+
+      if(categoriaDb[0] === undefined){return res.status(400).json({ok:false,
+                                                    message:'The category required does not exist'})}
     res.json({ok:true,
               categoria:categoriaDb}) })}})
-
 
 
 
@@ -45,7 +50,6 @@ const app = express();
   let categoria = new Categoria({nombre:body.nombre,
                                  usuario:req.usuario.usuario,
                                  descripcion:body.descripcion});
-
   categoria.save((error,categoriaDb)=>{
 
     if(error){return res.status(500).json({ok:false,
@@ -53,9 +57,8 @@ const app = express();
 
     if(!categoriaDb){return res.status(400).json({ok:false,
                                                   message:error})}
-    res.json({ok:true,
-              categoria:categoriaDb})})})
-
+    res.status(201).json({ok:true,
+                          categoria:categoriaDb})})})
 
 
 
